@@ -1,0 +1,69 @@
+///*----------------------------------------------------------------
+//    #SHADOWS
+//------------------------------------------------------------------*/
+
+@mixin card {
+    box-shadow: 0 5px 20px 0 clr(black, .04);
+    background: clr(white);
+    border-radius: 4px;
+    padding: $app__console-card-padding;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+@mixin modal-header {
+    padding: rem(25);
+
+    .modal-title {
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: rem(0.8);
+        margin: 0 auto;
+        color: clr(dark-slate-blue);
+        text-transform: uppercase;
+    }
+
+    .close-icon {
+        color: clr(black);
+        cursor: pointer;
+        opacity: .6;
+        transition: all .3s ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+@mixin widget-title {
+    width: 100%;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: rem(1.2);
+    margin-bottom: 10px;
+
+    .label {
+        color: clr(gray1);
+        font-size: rem(16);
+        @include sm {
+            font-size: rem(12);
+        }
+        @include xs {
+            font-size: rem(11);
+        }
+    }
+
+    .link {
+        color: clr(dark-slate-blue);
+        font-size: rem(12);
+        cursor: pointer;
+
+        @include xs {
+            font-size: rem(11);
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

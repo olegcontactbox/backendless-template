@@ -1,0 +1,31 @@
+@include font-face('Material Icons', '#{$app__base-path-font}material/MaterialIcons-Regular');
+@include font-face('Roboto', '#{$app__base-path-font}roboto/Roboto-Medium', 500, null, ttf);
+@include font-face('Poppins', '#{$app__base-path-font}poppins/Poppins-Bold', 700, null, ttf);
+@include font-face('Poppins', '#{$app__base-path-font}poppins/Poppins-SemiBold', 600, null, ttf);
+@include font-face('Poppins', '#{$app__base-path-font}poppins/Poppins-Medium', 500, null, ttf);
+@include font-face('Poppins', '#{$app__base-path-font}poppins/Poppins-Regular', 400, null, ttf);
+@include font-face('Poppins', '#{$app__base-path-font}poppins/Poppins-Light', 300, null, ttf);
+@include font-face('Roboto', '#{$app__base-path-font}roboto/Roboto-Regular', 400, null, ttf);
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}

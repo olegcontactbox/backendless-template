@@ -4,10 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from './store/app.reducer';
-import { AppEffects } from './store/app.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { NewsService } from './core/services/news.service';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { FirebaseService } from './core/services/firebase.service';
+import { reducers, appEffects } from './store/index';
 
 @NgModule({
   declarations: [
@@ -16,10 +19,12 @@ import { NewsService } from './core/services/news.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([AppEffects]),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(appEffects),
   ],
-  providers: [NewsService],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,54 @@
+@import "styles/core";
+
+.news {
+    &__post {
+        // background: lightblue;
+        margin: 8px;
+
+        & .post {
+            &__header span {
+                font-size: 36px;
+                font-weight: 500;
+                outline: none;
+                cursor: pointer;
+
+                &:hover {
+                    color: #f2a561;
+                }
+            }
+
+            &__date {
+                font-size: 14px;
+            }
+
+            &__preview {
+                display: flex;
+                margin: 30px 0;
+
+                &-image {
+                    width: 300px;
+                    height: 200px;
+                    margin-right: 30px;
+                    outline: none;
+                    cursor: pointer;
+
+                    @include sm {
+                        margin-right: 0;
+                        margin-bottom: 30px;
+                    }
+
+                    & img {
+                        width: 300px;
+                        height: 200px;
+                        object-fit: cover;
+                    }
+                }
+
+                @include sm {
+                    flex-wrap: wrap;
+                }
+            }
+        }
+
+    }
+}

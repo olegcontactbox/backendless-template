@@ -1,0 +1,97 @@
+///*-------------------------------------------------------------------------
+//   #SETTINGS CONFIG
+//--------------------------------------------------------------------------*/
+
+//	CONTENT THIS FILE:
+//		# NAMESPACE
+//      # CONFIG - FONTS
+//		# BASIC VALUE FOR PROJECT
+//      # HEADINGS | FONT-SIZE DEFAULT
+//		# CONFIG - GRID - FLOAT
+//		# CONFIG - RESPONSIVE TYPE
+
+///*-------------------------------------------------------------------------
+//   	# NAMESPACE
+//--------------------------------------------------------------------------*/
+
+$app__ns: ndax- !default;
+
+///*-----------------------------------------------------
+///     # CONFIG - FONTS
+///-----------------------------------------------------*/
+
+$app__font--default: 'Poppins', Helvetica Neue;
+$app__font--alternative: 'Roboto', Helvetica Neue;
+
+///*-------------------------------------------------------------------------
+//   	# BASIC VALUES FOR PROJECT
+//--------------------------------------------------------------------------*/
+
+$app__base-font-size: 16;
+$app__base-line-height: 1.5;
+$app__base-color: black;
+$app__base-background-document: white;
+$app__base-font-family: $app__font--default;
+$app__base-typography-color: white;
+$app__base-spacing: 30px;
+$app__base-path-font: "/assets/fonts/" !default;
+$app__base-path-img: "../assets/images/";
+$app__base-ctrl-height: 50px;
+///*------------------------------------
+//    # HEADINGS | FONT-SIZE DEFAULT
+//------------------------------------*/
+
+$app__h1: 32 !default;
+$app__h2: 24 !default;
+$app__h3: 20 !default;
+$app__h4: 18 !default;
+$app__h5: 13 !default;
+$app__h6: 11 !default;
+
+///*-----------------------------------------------------
+///		# CONFIG - RESPONSIVE TYPE
+///-----------------------------------------------------*/
+$app__screen-ts: 375px;
+$app__screen-xs: 460px;
+$app__screen-sm: 768px;
+$app__screen-md: 992px;
+$app__screen-lg: 1200px;
+$app__screen-elg: 1408px;
+$app__screen-xl: 1600px;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: $app__screen-xs + 1px,
+    md: $app__screen-sm + 1px,
+    lg: $app__screen-md + 1px,
+    xl: $app__screen-lg + 1px
+) !default;
+
+// $container-max-widths: (
+//    sm: $app__screen-xs - 36px,
+//    md: $app__screen-sm - 48px,
+//    lg: $app__screen-md - 32px,
+//    xl: $app__screen-lg - 60px
+// ) !default;
+
+// TODO: replace bootstrap breakpoints with ours
+
+///*-----------------------------------------------------
+///		# CONFIG - CONSOLE VARIABLES
+///-----------------------------------------------------*/
+$app__console-header-height: 80;
+$app__console-header-height-sm: 60;
+$app__console-content-max-width__normal: 1280;
+$app__console-sidenav-width: 100;
+$app__console-scrollbar-width: 17px;
+$app__console-container-padding: 20px;
+$app__console-container-padding-lg: 20px;
+$app__console-container-padding-sm: 10px;
+$app__console-card-padding: 24px;
+$app__console-container-vertical-padding: 20px;
+
+
+///*-----------------------------------------------------
+///		# CONFIG - LANDING VARIABLES
+///-----------------------------------------------------*/
+$app__landing-update-layout-height: 40px;

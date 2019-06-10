@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NewsComponent } from './pages/news/news.component';
+import { PostComponent } from './pages/post/post.component';
 
 
 const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
+    },
+    {
+        path: 'news',
+        component: NewsComponent,
         // children: [
         //     {
         //         path: '',
@@ -17,8 +22,8 @@ const routes: Routes = [
         // ],
     },
     {
-        path: 'news',
-        component: NewsComponent,
+        path: 'post/:id',
+        component: PostComponent,
     },
 ];
 
@@ -26,4 +31,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

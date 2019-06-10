@@ -1,0 +1,89 @@
+///*------------------------------------
+//    #TOOLS-RESPONSIVE
+//------------------------------------*/
+@mixin xl {
+    @media (max-width: #{$app__screen-xl}) {
+        @content;
+    }
+}
+
+@mixin elg {
+    @media (max-width: #{$app__screen-elg}) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media (max-width: #{$app__screen-lg}) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (max-width: #{$app__screen-md}) {
+        @content;
+    }
+}
+
+
+@mixin sm {
+    @media (max-width: #{$app__screen-sm}) {
+        @content;
+    }
+}
+
+
+@mixin xs {
+    @media (max-width: #{$app__screen-xs}) {
+        @content;
+    }
+}
+
+@mixin ts {
+    @media (max-width: #{$app__screen-ts}) {
+        @content;
+    }
+}
+
+//
+//@mixin screen {
+//    @media (max-width: #{$app__small}) {
+//        @content;
+//    }
+//}
+//
+//@mixin screen-1450 {
+//    @media (max-width: #{$screen-width-1450}) {
+//        @content;
+//    }
+//}
+//
+//@mixin screen-small {
+//    @media (max-width: #{$screen-small-width}) {
+//        @content;
+//    }
+//}
+//
+//@mixin tab {
+//    @media (max-width: #{$tab-width}) {
+//        @content;
+//    }
+//}
+//
+//@mixin tel {
+//    @media (max-width: #{$tel-width}) {
+//        @content;
+//    }
+//}
+//
+//@mixin tel-md {
+//    @media (max-width: #{$tel-medium-width}) {
+//        @content;
+//    }
+//}
+//
+//@mixin tel-small {
+//    @media (max-width: #{$tel-small-width}) {
+//        @content;
+//    }
+//}

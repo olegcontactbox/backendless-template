@@ -1,0 +1,26 @@
+.post {
+    &__header {
+        font-weight: 500;
+        font-size: 36px;
+    }
+
+    &__date {
+        font-size: 14px;
+    }
+
+    &__content {
+        margin: 30px 0;
+        // margin: unset;
+        // padding: unset;
+        // border: unset;
+        // font-weight: unset;
+        // font-style: unset;
+        // font-size: unset;
+        // font-family: unset;
+        // vertical-align: unset;
+        // text-decoration: unset;
+        // -webkit-box-sizing: unset;
+        // -moz-box-sizing: unset;
+        // box-sizing: unset;
+    }
+}

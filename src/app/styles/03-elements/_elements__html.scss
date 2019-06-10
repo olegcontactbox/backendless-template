@@ -1,0 +1,36 @@
+/*------------------------------------
+    # ELEMENT HTML
+------------------------------------*/
+
+html {
+    font-family: $app__base-font-family;
+    font-size: $app__base-font-size + px;
+    line-height: $app__base-line-height;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    position: relative;
+    height: 100%;
+    // scroll-bottom: smooth; ???
+
+    .zopim {
+        display: none;
+        position: fixed !important;
+        z-index: 2000 !important;
+    }
+
+    &.chat-visible {
+        .zopim {
+            display: initial;
+        }
+    }
+}
+
+.material-icons {
+    user-select: none;
+}
+
+
+/*------------------------------------
+    # END ELEMENT HTML
+------------------------------------*/

@@ -1,5 +1,17 @@
-<p>
-  news works!
-</p>
-
-
+<div *ngIf="news$" class="news">
+  <div class="news__post" *ngFor="let post of news$ | async">
+    <div class="post__header">
+      <span routerLink="/post/{{post.id}}">
+        {{post.header}}
+      </span>
+    </div>
+    <div class="post__date">{{post.date | date:"medium"}}</div>
+    <div class="post__preview">
+      <div class="post__preview-image" routerLink="/post/{{post.id}}">
+        <img [src]="post.previewImageLink">
+      </div>
+      <div class="post__preview-text">{{post.previewText}}</div>
+    </div>
+    <!-- <div class="post__content" [innerHtml]="sanitizer.bypassSecurityTrustHtml(post.content)"></div> -->
+  </div>
+</div>

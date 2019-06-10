@@ -1,0 +1,48 @@
+$ndax-loader-size: 80px;
+$ndax-loader-weight: 6px;
+
+.ndax-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: z-index(nav);
+    //background-color: transparentize(#fff, 0);
+    //animation: fadeIn .15s linear;
+
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: $ndax-loader-weight solid rgba(255, 255, 255, 0);
+        border-top: $ndax-loader-weight solid clr(dark-slate-blue);
+        border-radius: 50%;
+        width: $ndax-loader-size;
+        height: $ndax-loader-size;
+        animation: ndaxSpin .75s ease-in-out infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
