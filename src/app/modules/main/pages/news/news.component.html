@@ -1,17 +1,28 @@
-<div *ngIf="news$" class="news">
-  <div class="news__post" *ngFor="let post of news$ | async">
-    <div class="post__header">
-      <span routerLink="/post/{{post.id}}">
-        {{post.header}}
-      </span>
+<div *ngIf="news" class="news">
+
+  <div class="news__preview" *ngFor="let preview of news">
+
+    <div class="preview__image" routerLink="/post/{{preview.id}}">
+      <img [src]="preview.previewImageLink">
     </div>
-    <div class="post__date">{{post.date | date:"medium"}}</div>
-    <div class="post__preview">
-      <div class="post__preview-image" routerLink="/post/{{post.id}}">
-        <img [src]="post.previewImageLink">
+
+    <div class="preview__content">
+      <div class="header">
+        <span routerLink="/post/{{preview.id}}">
+          {{preview.header}}
+        </span>
       </div>
-      <div class="post__preview-text">{{post.previewText}}</div>
+      <div class="date">{{preview.date | date:"medium"}}</div>
+      <div class="text">{{preview.previewText}}</div>
     </div>
-    <!-- <div class="post__content" [innerHtml]="sanitizer.bypassSecurityTrustHtml(post.content)"></div> -->
+
   </div>
+  <!-- <div #loader>loader</div> -->
+  <div *ngIf="!isAllNewsLoaded" #loader class="lds-ellipsis">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div *ngIf="isAllNewsLoaded" class="news__no-news-message">There is no more news</div>
 </div>

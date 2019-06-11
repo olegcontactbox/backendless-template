@@ -15,8 +15,18 @@ export class FirebaseService {
     ) {
     }
 
-    getNews(): Observable<DocumentChangeAction<{}>[]> {
-        return this.afs.collection('/fl_content', (doc) => doc.orderBy('date', 'asc')).snapshotChanges();
+    getNews(currentNewsAmount: number, lastLoaded: any, newsGetAmount: number): Observable<DocumentChangeAction<{}>[]> {
+        // const newsGetAmount = 5;
+        console.log(`get news : `, currentNewsAmount, lastLoaded);
+
+        if (!currentNewsAmount) {
+
+            return this.afs.collection('/fl_content', (doc) => doc
+                .orderBy('date', 'desc').limit(newsGetAmount)).snapshotChanges();
+        }
+        return this.afs.collection('/fl_content', (doc) => doc
+            .orderBy('date', 'desc').startAfter(lastLoaded).limit(newsGetAmount)).snapshotChanges();
+
     }
 
     getPost(id: string): Observable<firestore.DocumentSnapshot> {

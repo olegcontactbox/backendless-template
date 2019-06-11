@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { tap, switchMap, map, catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { NewsTypes, LoadNewsAction, LoadNewsSuccessAction, LoadNewsErrorAction, NewsActions } from './news.actions';
+import { tap, switchMap, map, catchError, withLatestFrom, skipWhile } from 'rxjs/operators';
+import { Observable, of, combineLatest } from 'rxjs';
+import { NewsTypes, LoadNewsAction, LoadNewsSuccessAction, LoadNewsErrorAction, NewsActions, SetCurrentNewsAmountAction, SetLastLoadedAction, SetIsAllNewsLoadedAction } from './news.actions';
 import { FirebaseService } from '../core/services/firebase.service';
+import { AppState } from '.';
 
 @Injectable()
 export class NewsEffects {
@@ -13,17 +14,36 @@ export class NewsEffects {
     loadNews$: Observable<NewsActions> = this.actions$.pipe(
         ofType<LoadNewsAction>(NewsTypes.LoadNews),
         // map(action => action.payload),
-        switchMap(() => this.firebase.getNews()),
-        map((res) => {
+        withLatestFrom(this.store.select(store => store.newsState)),
+        switchMap(([action, newsState]) => {
+
+            if (newsState.isAllNewsLoaded) { return newsState.news; }
+            // this.store.dispatch(new SetCurrentNewsAmountAction())
+            return this.firebase.getNews(newsState.currentNewsAmount, newsState.lastLoaded, newsState.newsGetAmount);
+        }),
+
+        switchMap((res) => {
+
+            this.store.dispatch(new SetCurrentNewsAmountAction(res.length));
+
+            if (!res.length) {
+                return of(new SetIsAllNewsLoadedAction());
+            }
+
             const data = res.map((item) => item.payload.doc.data());
-            return new LoadNewsSuccessAction(data);
+
+            console.log(`data from efx`, data, res[res.length - 1]);
+
+
+
+            // return new LoadNewsSuccessAction(data);
+            return of(
+                new LoadNewsSuccessAction(data),
+                // new SetCurrentNewsAmountAction(res.length),
+                new SetLastLoadedAction(res[res.length - 1].payload.doc)
+            );
+
         })
-        // switchMap(() => this.firebase.getNews().then(res => {
-        //     console.log(`res`, res);
-        //     return new LoadNewsSuccessAction(res.docs);
-        // }
-        // )
-        // )
     );
 
     @Effect({ dispatch: false })
@@ -36,10 +56,13 @@ export class NewsEffects {
         }),
     );
 
+
     constructor(
         private actions$: Actions,
         private firebase: FirebaseService,
+        private store: Store<AppState>
     ) {
-    }
 
+
+    }
 }
