@@ -10,12 +10,15 @@
       <div class="header">
         <span routerLink="/post/{{preview.id}}">
           {{preview.header}}
+          <i class="material-icons" routerLink="/post/{{preview.id}}">
+            keyboard_arrow_right
+          </i>
         </span>
       </div>
       <div class="date">{{preview.date | date:"medium"}}</div>
       <div class="text">{{preview.previewText}}</div>
     </div>
-
+    <div class="preview__divider"></div>
   </div>
   <!-- <div #loader>loader</div> -->
   <div *ngIf="!isAllNewsLoaded" #loader class="lds-ellipsis">

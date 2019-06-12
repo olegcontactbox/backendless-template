@@ -4,4 +4,8 @@
     max-width: 1140px;
     padding: 30px;
     margin: 0 auto;
+
+    @include xs {
+        padding: 22px;
+    }
 }
