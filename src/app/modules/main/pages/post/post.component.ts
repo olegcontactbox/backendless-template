@@ -4,6 +4,8 @@ import { switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/core/services/firebase.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AppState } from 'src/app/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post',
@@ -11,12 +13,13 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  postId$: Observable<any>;
+  // postId$: Observable<any>;
   post;
 
 
   constructor(
     public sanitizer: DomSanitizer,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private router: Router,
     private firebaseService: FirebaseService,
@@ -35,13 +38,31 @@ export class PostComponent implements OnInit {
 
     // const id = this.route.snapshot.paramMap.get('id');
 
-    this.firebaseService.getPost(this.route.snapshot.paramMap.get('id'))
-      .toPromise()
-      .then(res => {
-        console.log(res.data());
-        this.post = res.data();
-      });
 
+    /////////////////////
+
+    // this.firebaseService.getPost(this.route.snapshot.paramMap.get('id'))
+    //   .toPromise()
+    //   .then(res => {
+    //     console.log(res.data());
+    //     this.post = res.data();
+    //   });
+
+    ///////////////////////////
+
+    this.store.select(store => store.newsState).subscribe(newsState => {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.post = newsState.news.find(n => n.id === id);
+      console.log(`post from store`, this.post);
+      if (!this.post) {
+        this.firebaseService.getPost(this.route.snapshot.paramMap.get('id'))
+          .toPromise()
+          .then(res => {
+            console.log(`post from fs`, res.data());
+            this.post = res.data();
+          });
+      }
+    });
   }
 
 }

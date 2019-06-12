@@ -1,10 +1,16 @@
+@import "styles/core";
+
 .post {
     &__header {
         font-weight: 500;
         font-size: 36px;
         text-align: center;
+
+        @include sm {
+            font-size: 24px;
+        }
     }
-    
+
     &__date {
         font-size: 14px;
         text-align: center;
@@ -24,5 +30,30 @@
         // -webkit-box-sizing: unset;
         // -moz-box-sizing: unset;
         // box-sizing: unset;
+
+        // & div img {
+        //     max-width: 100%!important;
+        //     object-fit: contain!important;
+        // }
+    }
+
+    &__back {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        margin: 0 auto;
+        border: 1px solid lightgray;
+        border-radius: 25px;
+        height: 50px;
+        padding: 0 20px;
+        cursor: pointer;
+        outline: none;
     }
 }
+
+// img {
+//     max-width: 100%!important;
+//     max-width: 100%;
+//     object-fit: contain;
+//     height: auto!important;
+// }

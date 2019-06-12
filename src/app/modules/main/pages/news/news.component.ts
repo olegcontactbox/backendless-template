@@ -75,7 +75,7 @@ export class NewsComponent implements OnInit {
   }
 
   getNews() {
-    console.log(`getNews`);
+    console.log(`getNews from comp`);
     this.store.dispatch(new LoadNewsAction());
     // this.store.dispatch(new LoadNewsAction({
     //   currentNewsAmount: this.currentNewsAmount,
@@ -88,7 +88,7 @@ export class NewsComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(e) {
-    console.log(`window scroll`, this.isAllNewsLoaded)
+    console.log(`window scroll`, this.isAllNewsLoaded);
     if (this.isAllNewsLoaded) { return; }
     const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
     const x = this.loader.nativeElement.getBoundingClientRect();

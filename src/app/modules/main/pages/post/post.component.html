@@ -1,5 +1,9 @@
 <div *ngIf="post">
-    <div class="post__header" routerLink="/post/{{post.id}}">{{post.header}}</div>
+    <div class="post__header">{{post.header}}</div>
     <div class="post__date">{{post.date | date:"medium"}}</div>
-    <div class="post__content" [innerHtml]="sanitizer.bypassSecurityTrustHtml(post.content)"></div>
+    <div class="post__content adaptive-images-container" [innerHtml]="sanitizer.bypassSecurityTrustHtml(post.content)">
+    </div>
+    <div class="post__back" routerLink="/news">
+        Back to other news
+    </div>
 </div>

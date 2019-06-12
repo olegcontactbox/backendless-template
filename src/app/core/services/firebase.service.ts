@@ -30,7 +30,7 @@ export class FirebaseService {
     }
 
     getPost(id: string): Observable<firestore.DocumentSnapshot> {
-        console.log(`getP`, id);
+        console.log(`get post : `, id);
         // this.afs.collection('/fl_content').doc(id).get().toPromise().then(res => console.log(res.data()));
         return this.afs.collection('/fl_content').doc(id).get();
     }
