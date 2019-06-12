@@ -1,0 +1,41 @@
+<div class="contact-us">
+
+
+  <form [formGroup]="form" class="contact-us__form" (submit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your first name</mat-label>
+      <input formControlName="name" matInput />
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        Field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your email</mat-label>
+      <input formControlName="email" matInput />
+      <mat-error *ngIf="form.controls['email'].hasError('required')">
+        Field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Subject of your message</mat-label>
+      <input formControlName="subject" matInput />
+      <mat-error *ngIf="form.controls['subject'].hasError('required')">
+        Field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your message</mat-label>
+      <textarea formControlName="message" matInput ></textarea>
+      <mat-error *ngIf="form.controls['message'].hasError('required')">
+        Field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="form__submit">
+      <button type="submit" mat-raised-button [disabled]="form.invalid">
+        Send
+      </button>
+    </div>
+  </form>
+
+
+</div>

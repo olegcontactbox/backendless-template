@@ -1,0 +1,41 @@
+@import "styles/core";
+
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid lightgray;
+        border-radius: 6px;
+        width: 500px;
+
+        & .mat-form-field {
+            width: 100%;
+
+            & textarea {
+                min-height: 180px;
+            }
+        }
+
+        & .form__submit button {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            margin: 0 auto;
+            border: 1px solid lightgray;
+            border-radius: 25px;
+            height: 50px;
+            padding: 0 20px;
+            cursor: pointer;
+            outline: none;
+            background: none;
+            text-transform: uppercase;
+        }
+
+    }
+}
