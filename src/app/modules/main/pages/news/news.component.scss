@@ -21,6 +21,9 @@
                 outline: none;
                 cursor: pointer;
 
+                // min-width: 300px;
+                // max-width: 300px;
+
                 @include md {
                     margin: 0 auto;
                     margin-bottom: 20px;
@@ -33,8 +36,11 @@
 
                 & img {
                     width: 300px;
+                    
+                    // width: 100%;
                     height: 200px;
                     object-fit: cover;
+                    // object-fit: contain;
 
                     @include xs {
                         width: 270px;

@@ -21,13 +21,19 @@ export class NewsEffects {
             // this.store.dispatch(new SetCurrentNewsAmountAction())
             return this.firebase.getNews(newsState.currentNewsAmount, newsState.lastLoaded, newsState.newsGetAmount);
         }),
+        withLatestFrom(this.store.select(store => store.newsState.newsGetAmount)),
 
-        switchMap((res) => {
 
+        switchMap(([res, newsGetAmount]) => {
+            console.log(`res raw`, res);
             this.store.dispatch(new SetCurrentNewsAmountAction(res.length));
 
             if (!res.length) {
                 return of(new SetIsAllNewsLoadedAction());
+            }
+
+            if (res.length < newsGetAmount) {
+                this.store.dispatch(new SetIsAllNewsLoadedAction());
             }
 
             const data = res.map((item) => item.payload.doc.data());
@@ -35,12 +41,12 @@ export class NewsEffects {
             console.log(`data from efx`, data, res[res.length - 1]);
 
 
-
             // return new LoadNewsSuccessAction(data);
             return of(
                 new LoadNewsSuccessAction(data),
                 // new SetCurrentNewsAmountAction(res.length),
                 new SetLastLoadedAction(res[res.length - 1].payload.doc)
+
             );
 
         })

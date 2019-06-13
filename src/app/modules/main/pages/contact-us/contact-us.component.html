@@ -3,7 +3,7 @@
 
   <form [formGroup]="form" class="contact-us__form" (submit)="onSubmit()">
     <mat-form-field appearance="outline">
-      <mat-label>Enter your first name</mat-label>
+      <mat-label>Enter your name</mat-label>
       <input formControlName="name" matInput />
       <mat-error *ngIf="form.controls['name'].hasError('required')">
         Field is <strong>required</strong>
@@ -31,11 +31,13 @@
       </mat-error>
     </mat-form-field>
     <div class="form__submit">
-      <button type="submit" mat-raised-button [disabled]="form.invalid">
+      <!-- <button type="submit" mat-raised-button [disabled]="form.invalid"> -->
+      <button type="submit" mat-raised-button >
         Send
       </button>
     </div>
   </form>
+  <!-- <button (click)="onSubmit()">send test</button> -->
 
 
 </div>

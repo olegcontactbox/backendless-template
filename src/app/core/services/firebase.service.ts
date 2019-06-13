@@ -22,10 +22,14 @@ export class FirebaseService {
         if (!currentNewsAmount) {
 
             return this.afs.collection('/fl_content', (doc) => doc
-                .orderBy('date', 'desc').limit(newsGetAmount)).snapshotChanges();
+                .where('type', '==', 'news')
+                .orderBy('date', 'desc')
+                .limit(newsGetAmount)).snapshotChanges();
         }
         return this.afs.collection('/fl_content', (doc) => doc
-            .orderBy('date', 'desc').startAfter(lastLoaded).limit(newsGetAmount)).snapshotChanges();
+            .where('type', '==', 'news')
+            .orderBy('date', 'desc')
+            .startAfter(lastLoaded).limit(newsGetAmount)).snapshotChanges();
 
     }
 
@@ -38,4 +42,7 @@ export class FirebaseService {
     //     return this.afs.firestore.collection('/fl_content').get();
     // }
 
+    sendMessage(message) {
+        this.afs.collection('/messages').add(message);
+    }
 }

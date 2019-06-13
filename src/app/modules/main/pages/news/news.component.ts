@@ -88,21 +88,18 @@ export class NewsComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(e) {
-    console.log(`window scroll`, this.isAllNewsLoaded);
+    console.log(`window scroll`);
+
     if (this.isAllNewsLoaded) { return; }
     const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-    const x = this.loader.nativeElement.getBoundingClientRect();
+    const loaderPosition = this.loader.nativeElement.getBoundingClientRect();
 
 
-    const check = x.bottom < windowHeight;
+    const check = loaderPosition.bottom < windowHeight;
+
     if (check && !this.isAllNewsLoaded) {
-
-      // this.isLoad = true;
       this.getNews();
-
     }
-
-
   }
 
 }
