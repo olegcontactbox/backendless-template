@@ -1,3 +1,25 @@
-<p>
-  home component works!
-</p>
+<div class="home">
+
+  <div class="swiper-container" [swiper]="config" [(index)]="index">
+    <div class="title">Announcements</div>
+    <div class="swiper-wrapper">
+      <div *ngFor="let a of announcements$ | async" class="swiper-slide">
+        <div class="slide">
+          <div class="slide__image">
+            <img [src]="a.imageLink">
+          </div>
+        </div>
+        <div class="slide__description">
+          <!-- <div class="date">{{a.date}}</div> -->
+          <div class="text">{{a.description}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="swiper-scrollbar"></div> -->
+    <!-- <div class="swiper-pagination"></div> -->
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>

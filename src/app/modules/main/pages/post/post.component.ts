@@ -6,6 +6,7 @@ import { FirebaseService } from 'src/app/core/services/firebase.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AppState } from 'src/app/store';
 import { Store } from '@ngrx/store';
+import { INews } from 'src/app/core/models/interfaces/news';
 
 @Component({
   selector: 'app-post',
@@ -14,6 +15,7 @@ import { Store } from '@ngrx/store';
 })
 export class PostComponent implements OnInit {
   // postId$: Observable<any>;
+  // post: INews;
   post;
 
 

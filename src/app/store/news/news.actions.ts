@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { INews } from '../../core/models/interfaces/news';
 
 export enum NewsTypes {
     LoadNews = '[NEWS] Load news',
@@ -17,7 +18,8 @@ export class LoadNewsAction implements Action {
 }
 export class LoadNewsSuccessAction implements Action {
     readonly type = NewsTypes.LoadNewsSuccess;
-    constructor(public payload: any) { }
+    constructor(public payload: INews[]) {
+    }
 }
 export class LoadNewsErrorAction implements Action {
     readonly type = NewsTypes.LoadNewsError;
@@ -36,7 +38,7 @@ export class SetLastLoadedAction implements Action {
 
 export class SetIsAllNewsLoadedAction implements Action {
     readonly type = NewsTypes.SetIsAllNewsLoaded;
-    // constructor(public payload: boolean) { }
+    constructor() { }
 }
 
 

@@ -13,6 +13,7 @@ import { FirebaseService } from './core/services/firebase.service';
 import { reducers, appEffects } from './store/index';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(appEffects),
+    // SwiperModule,
   ],
-  providers: [FirebaseService],
+  providers: [
+    FirebaseService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

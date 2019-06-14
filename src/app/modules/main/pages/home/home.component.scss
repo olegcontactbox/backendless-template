@@ -1,0 +1,46 @@
+@import '~swiper/dist/css/swiper.min.css';
+
+.swiper-container {
+    max-width: 800px;
+    padding: 100px 0;
+
+    & .title {
+        position: absolute;
+        top: 24px;
+        width: 100%;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    & .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        // height: 300px;
+        // max-width: 400px;
+
+        // padding-bottom: 200px;
+
+        & .slide {
+            &__image {
+                width: 100%;
+                text-align: center;
+                & img {
+                    // width: 100%;
+                    width: 80%;
+
+                }
+            }
+
+            &__description {
+                position: absolute;
+                top: calc(100% + 10px);
+                max-width: 80%;
+                & .text {
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}

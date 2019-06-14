@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Action, Store } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { tap, switchMap, map, catchError, withLatestFrom, skipWhile } from 'rxjs/operators';
-import { Observable, of, combineLatest } from 'rxjs';
-import { NewsTypes, LoadNewsAction, LoadNewsSuccessAction, LoadNewsErrorAction, NewsActions, SetCurrentNewsAmountAction, SetLastLoadedAction, SetIsAllNewsLoadedAction } from './news.actions';
-import { FirebaseService } from '../core/services/firebase.service';
-import { AppState } from '.';
+import { tap, switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import {
+    NewsTypes,
+    LoadNewsAction,
+    LoadNewsSuccessAction,
+    LoadNewsErrorAction,
+    NewsActions,
+    SetCurrentNewsAmountAction,
+    SetLastLoadedAction,
+    SetIsAllNewsLoadedAction,
+} from './news.actions';
+import { FirebaseService } from '../../core/services/firebase.service';
+import { AppState } from '..';
 
 @Injectable()
 export class NewsEffects {
@@ -16,14 +25,11 @@ export class NewsEffects {
         // map(action => action.payload),
         withLatestFrom(this.store.select(store => store.newsState)),
         switchMap(([action, newsState]) => {
-
             if (newsState.isAllNewsLoaded) { return newsState.news; }
-            // this.store.dispatch(new SetCurrentNewsAmountAction())
             return this.firebase.getNews(newsState.currentNewsAmount, newsState.lastLoaded, newsState.newsGetAmount);
         }),
+
         withLatestFrom(this.store.select(store => store.newsState.newsGetAmount)),
-
-
         switchMap(([res, newsGetAmount]) => {
             console.log(`res raw`, res);
             this.store.dispatch(new SetCurrentNewsAmountAction(res.length));

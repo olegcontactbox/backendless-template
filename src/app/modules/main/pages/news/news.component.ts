@@ -1,10 +1,10 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
-import { LoadNewsAction } from '../../../../store/news.actions';
-import { Observable } from 'rxjs';
+import { LoadNewsAction } from '../../../../store/news/news.actions';
+import { Observable, Subscription } from 'rxjs';
 import { AppState } from 'src/app/store';
 import { map } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
+import { INews } from 'src/app/core/models/interfaces/news';
 // import { getNewsState } from 'src/app/store/news.reducer';
 
 @Component({
@@ -12,79 +12,43 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
 
 
   // news$: Observable<any>;
-  news: any[];
+  news: INews[];
 
-  currentNewsAmount = 0;
-  isLoad = false;
+  // currentNewsAmount = 0;
+  // isLoad = false;
   isAllNewsLoaded = false;
+
+  private sub: Subscription = new Subscription();
 
   @ViewChild('loader', { static: false }) loader: ElementRef;
 
-  constructor(private store: Store<AppState>, private sanitizer: DomSanitizer) { }
+  constructor(private store: Store<AppState>) { }
 
 
   ngOnInit() {
+    this.sub.add(
+      this.store.select((state: AppState) => state.newsState).subscribe(newsState => {
+        if (!newsState.currentNewsAmount) { this.getNews(); }
+        this.isAllNewsLoaded = newsState.isAllNewsLoaded;
+        this.news = newsState.news;
+        console.log(`comp data`, newsState, this.news);
+      })
+    );
+  }
 
-    // const getNewsState = (state: AppState) => state;
-
-    // AUTH
-    // const getNews = createSelector(
-    //   getNewsState,
-    //   getAppState,
-    // );
-
-    // this.store.dispatch(new LoadNewsAction(this.currentNewsAmount));
-
-    // this.isAuthenticating$ = this.store.select(fromStore.getAuthenticating);
-    // this.store.select((state: AppState) => state.newsState);
-    // .pipe(
-    //   map((news) => {
-    //     if (!news) { return; }
-    //     return [...news].sort((a, b) => {
-    //       if (a.date < b.date) { return 1; }
-    //       if (a.date > b.date) { return -1; }
-    //       return 0;
-    //     });
-    //   }),
-    // );
-    // this.news$ = this.store.select();
-    // this.news$ = this.store.select(state: AppState => state);
-
-
-
-    this.store.select((state: AppState) => state.newsState).subscribe(newsState => {
-
-      if (!newsState.currentNewsAmount) { this.getNews(); }
-      this.isAllNewsLoaded = newsState.isAllNewsLoaded;
-      this.news = newsState.news;
-      console.log(`comp data`, newsState, this.news);
-
-    });
-
-
-    // this.store.select(state => state.news).subscribe(res => console.log(`ressss`, res));
-    // this.news$ = this.store.select(state => state.news);
-    // this.store.select(state => state.news).subscribe(res => {
-    //   console.log(`res in comp` , res);
-    //   this.news = res;
-    // });
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   getNews() {
     console.log(`getNews from comp`);
     this.store.dispatch(new LoadNewsAction());
-    // this.store.dispatch(new LoadNewsAction({
-    //   currentNewsAmount: this.currentNewsAmount,
-    //   lastLoaded: this.lastLoaded,
-    //   // lastLoaded: this.news,
-    // }));
   }
-  // var elem = document.querySelector('#some-element');
-  // var bounding = elem.getBoundingClientRect();
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll(e) {
@@ -94,10 +58,9 @@ export class NewsComponent implements OnInit {
     const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
     const loaderPosition = this.loader.nativeElement.getBoundingClientRect();
 
+    const positionCheck = loaderPosition.bottom < windowHeight;
 
-    const check = loaderPosition.bottom < windowHeight;
-
-    if (check && !this.isAllNewsLoaded) {
+    if (positionCheck && !this.isAllNewsLoaded) {
       this.getNews();
     }
   }
