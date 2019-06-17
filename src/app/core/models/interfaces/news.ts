@@ -5,7 +5,6 @@ export interface INews {
     header: string;
     previewImageLink: string;
     previewText: string;
-    type: string;
     id: string;
     order: number;
     parentId: number;

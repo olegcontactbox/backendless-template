@@ -25,6 +25,7 @@ export class ContactUsComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
+    if (!this.form.valid) { return; }
     this.firebaseService.sendMessage(this.form.value)
       .then(res => this.notificationService.snackbar('Thanks! Your message successfully sent'))
       .catch(e => this.notificationService.snackbar('Error!'));

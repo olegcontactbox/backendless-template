@@ -1,7 +1,8 @@
 import { AnnouncementsTypes, AnnouncementsActions } from './announcements.actions';
+import { IAnnouncements } from 'src/app/core/models/interfaces/announcements';
 
 export class AnnouncementsState {
-    announcements: any[] = [];
+    announcements: IAnnouncements[] = [];
 }
 
 export function announcementsReducer(state = new AnnouncementsState(), action: AnnouncementsActions): AnnouncementsState {

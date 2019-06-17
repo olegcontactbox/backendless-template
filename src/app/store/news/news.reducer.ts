@@ -6,6 +6,7 @@ export class NewsState {
     newsGetAmount = 5;
     lastLoaded: any;
     isAllNewsLoaded: any = false;
+    allNewsAmount: number;
 }
 
 export function newsReducer(state = new NewsState(), action: NewsActions): NewsState {
@@ -19,6 +20,13 @@ export function newsReducer(state = new NewsState(), action: NewsActions): NewsS
         case NewsTypes.LoadNewsError: {
             return {
                 ...state,
+            };
+        }
+
+        case NewsTypes.LoadAllNewsAmountSuccess: {
+            return {
+                ...state,
+                allNewsAmount: action.payload,
             };
         }
 

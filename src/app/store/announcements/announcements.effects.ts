@@ -10,6 +10,7 @@ import {
     AnnouncementsActions, LoadAnnouncementsAction, AnnouncementsTypes,
     LoadAnnouncementsErrorAction, LoadAnnouncementsSuccessAction,
 } from './announcements.actions';
+import { IAnnouncements } from 'src/app/core/models/interfaces/announcements';
 
 @Injectable()
 export class AnnouncementsEffects {

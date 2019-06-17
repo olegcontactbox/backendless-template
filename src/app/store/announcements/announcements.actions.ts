@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { INews } from '../../core/models/interfaces/news';
+import { IAnnouncements } from 'src/app/core/models/interfaces/announcements';
 
 export enum AnnouncementsTypes {
     LoadAnnouncements = '[ANNOUNCEMENTS] Load announcements',
@@ -14,7 +15,7 @@ export class LoadAnnouncementsAction implements Action {
 }
 export class LoadAnnouncementsSuccessAction implements Action {
     readonly type = AnnouncementsTypes.LoadAnnouncementsSuccess;
-    constructor(public payload: any[]) {
+    constructor(public payload: IAnnouncements[]) {
     }
 }
 export class LoadAnnouncementsErrorAction implements Action {

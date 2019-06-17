@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     pagination: false,
     observer: true,
     spaceBetween: 20,
-    loop: true,
+    // loop: true,
 
     // autoplay: {
     //   delay: 8000,

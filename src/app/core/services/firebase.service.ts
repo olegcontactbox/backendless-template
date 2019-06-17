@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 
 @Injectable()
 export class FirebaseService {
 
     constructor(
-        // private store: Store<AppState>,
         private afs: AngularFirestore,
     ) {
     }
@@ -29,16 +28,19 @@ export class FirebaseService {
             .limit(newsGetAmount)).snapshotChanges() ;
     }
 
+    getNewsCounter(): Observable<firestore.DocumentSnapshot> {
+        return this.afs.collection('/counters').doc('newsCounter').get();
+    }
+
     getPost(id: string): Observable<firestore.DocumentSnapshot> {
         console.log(`get post : `, id);
         return this.afs.collection('/fl_content').doc(id).get();
     }
 
-    getAnnouncements(): Observable<DocumentChangeAction<{}>[]> {
+    getAnnouncements(): Observable<DocumentChangeAction<any>[]> {
         return this.afs.collection('/fl_content', (doc) => doc
             .where('_fl_meta_.schema', '==', 'announcement')
-            // .orderBy('_fl_meta_.createdDate.seconds', 'desc')
-            ).snapshotChanges();
+            .orderBy('date', 'asc')).snapshotChanges();
     }
 
     sendMessage(message): Promise<firestore.DocumentReference> {

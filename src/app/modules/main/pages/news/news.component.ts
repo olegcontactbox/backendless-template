@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
-import { LoadNewsAction } from '../../../../store/news/news.actions';
+import { LoadNewsAction, LoadAllNewsAmountAction } from '../../../../store/news/news.actions';
 import { Observable, Subscription } from 'rxjs';
 import { AppState } from 'src/app/store';
 import { map } from 'rxjs/operators';
@@ -32,10 +32,11 @@ export class NewsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub.add(
       this.store.select((state: AppState) => state.newsState).subscribe(newsState => {
+        if (!newsState.allNewsAmount) { this.store.dispatch(new LoadAllNewsAmountAction()); }
         if (!newsState.currentNewsAmount) { this.getNews(); }
         this.isAllNewsLoaded = newsState.isAllNewsLoaded;
         this.news = newsState.news;
-        console.log(`comp data`, newsState, this.news);
+        // console.log(`comp data`, newsState, this.news);
       })
     );
   }
@@ -45,14 +46,14 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   getNews() {
-    console.log(`getNews from comp`);
+    // console.log(`getNews from comp`);
     this.store.dispatch(new LoadNewsAction());
   }
 
 
   @HostListener('window:scroll', ['$event'])
   onScroll(e) {
-    console.log(`window scroll`);
+    // console.log(`window scroll`);
 
     if (this.isAllNewsLoaded) { return; }
     const windowHeight = (window.innerHeight || document.documentElement.clientHeight);

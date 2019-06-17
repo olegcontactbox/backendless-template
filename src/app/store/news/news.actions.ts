@@ -6,6 +6,10 @@ export enum NewsTypes {
     LoadNewsSuccess = '[NEWS] Load news [SUCCESS]',
     LoadNewsError = '[NEWS] Load news [ERROR]',
 
+    LoadAllNewsAmount = '[NEWS] Load all news amount',
+    LoadAllNewsAmountSuccess = '[NEWS] Load all news amount [SUCCESS]',
+    LoadAllNewsAmountError = '[NEWS] Load all news amount[ERROR]',
+
     SetCurrentNewsAmount = '[NEWS] Set current news amount',
     SetLastLoaded = '[NEWS] Set last loaded',
     SetIsAllNewsLoaded = '[NEWS] Set is all news loaded',
@@ -23,6 +27,23 @@ export class LoadNewsSuccessAction implements Action {
 }
 export class LoadNewsErrorAction implements Action {
     readonly type = NewsTypes.LoadNewsError;
+    constructor(public payload: any) { }
+}
+
+export class LoadAllNewsAmountAction implements Action {
+    readonly type = NewsTypes.LoadAllNewsAmount;
+    constructor() { }
+}
+
+export class LoadAllNewsAmountSuccessAction implements Action {
+    readonly type = NewsTypes.LoadAllNewsAmountSuccess;
+    constructor(public payload: number) {
+        console.log(`AMOUNT SUCC ACT`, payload);
+    }
+}
+
+export class LoadAllNewsAmountErrorAction implements Action {
+    readonly type = NewsTypes.LoadAllNewsAmountError;
     constructor(public payload: any) { }
 }
 
@@ -48,6 +69,9 @@ export type NewsActions
     = LoadNewsAction
     | LoadNewsSuccessAction
     | LoadNewsErrorAction
+    | LoadAllNewsAmountAction
+    | LoadAllNewsAmountSuccessAction
+    | LoadAllNewsAmountErrorAction
     | SetCurrentNewsAmountAction
     | SetLastLoadedAction
     | SetIsAllNewsLoadedAction

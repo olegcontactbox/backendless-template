@@ -12,9 +12,11 @@ import {
     SetCurrentNewsAmountAction,
     SetLastLoadedAction,
     SetIsAllNewsLoadedAction,
+    LoadAllNewsAmountAction,
 } from './news.actions';
 import { FirebaseService } from '../../core/services/firebase.service';
 import { AppState } from '..';
+import { LoadAllNewsAmountSuccessAction } from './news.actions';
 
 @Injectable()
 export class NewsEffects {
@@ -29,32 +31,40 @@ export class NewsEffects {
             return this.firebase.getNews(newsState.currentNewsAmount, newsState.lastLoaded, newsState.newsGetAmount);
         }),
 
-        withLatestFrom(this.store.select(store => store.newsState.newsGetAmount)),
-        switchMap(([res, newsGetAmount]) => {
+        withLatestFrom(this.store.select(store => store.newsState)),
+        switchMap(([res, newsState]) => {
             console.log(`res raw`, res);
             this.store.dispatch(new SetCurrentNewsAmountAction(res.length));
 
-            // if (!res.length) {
-            //     return of(new SetIsAllNewsLoadedAction());
-            // }
-
-            if (res.length < newsGetAmount) {
+            if (newsState.currentNewsAmount >= newsState.allNewsAmount) {
                 this.store.dispatch(new SetIsAllNewsLoadedAction());
+            }
+
+            if (!res.length) {
+                return of(
+                    new LoadNewsSuccessAction([]),
+                );
             }
 
             const data = res.map((item) => item.payload.doc.data());
 
-            console.log(`data from efx`, data, res[res.length - 1]);
-
-
-            // return new LoadNewsSuccessAction(data);
             return of(
                 new LoadNewsSuccessAction(data),
-                // new SetCurrentNewsAmountAction(res.length),
-                new SetLastLoadedAction(res[res.length - 1].payload.doc)
-
+                new SetLastLoadedAction(res[res.length - 1].payload.doc),
             );
 
+        })
+    );
+
+    @Effect()
+    loadAllNewsAmount$: Observable<NewsActions> = this.actions$.pipe(
+        ofType<LoadAllNewsAmountAction>(NewsTypes.LoadAllNewsAmount),
+        withLatestFrom(this.store.select(store => store.newsState)),
+        switchMap(([action, newsState]) => {
+            return this.firebase.getNewsCounter();
+        }),
+        switchMap(res => {
+            return of(new LoadAllNewsAmountSuccessAction(res.data().value));
         })
     );
 
