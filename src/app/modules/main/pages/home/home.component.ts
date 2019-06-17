@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { LoadAnnouncementsAction } from '../../../../store/announcements/announcements.actions';
 import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { IAnnouncements } from 'src/app/core/models/interfaces/announcements';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   };
 
-  announcements$;
+  announcements$: Observable<IAnnouncements[]>;
 
   constructor(private store: Store<AppState>) { }
 
