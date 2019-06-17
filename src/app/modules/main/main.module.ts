@@ -6,19 +6,14 @@ import { NewsComponent } from './pages/news/news.component';
 import { PostComponent } from './pages/post/post.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { MatSelectModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatSnackBarModule } from '@angular/material';
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-
-export const MATERIAL_MODULES = [
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
-  MatIconModule,
-  MatSelectModule,
-];
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { FirebaseService } from '../../core/services/firebase.service';
+import { AppCoreModule } from 'src/app/core/core.module';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -28,18 +23,18 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
   declarations: [HomeComponent, NewsComponent, PostComponent, ContactUsComponent],
   imports: [
+    AppCoreModule,
     CommonModule,
     HomeRoutingModule,
     ReactiveFormsModule,
-    MATERIAL_MODULES,
     SwiperModule,
-
   ],
   providers: [
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG
     },
+    NotificationService,
   ]
 })
 export class MainModule { }

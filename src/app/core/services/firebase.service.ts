@@ -26,7 +26,7 @@ export class FirebaseService {
             .where('_fl_meta_.schema', '==', 'news')
             .orderBy('date', 'desc')
             .startAfter(lastLoaded)
-            .limit(newsGetAmount)).snapshotChanges();
+            .limit(newsGetAmount)).snapshotChanges() ;
     }
 
     getPost(id: string): Observable<firestore.DocumentSnapshot> {
@@ -41,7 +41,7 @@ export class FirebaseService {
             ).snapshotChanges();
     }
 
-    sendMessage(message) {
-        this.afs.collection('/messages').add(message);
+    sendMessage(message): Promise<firestore.DocumentReference> {
+        return this.afs.collection('/messages').add(message);
     }
 }

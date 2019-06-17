@@ -1,6 +1,6 @@
 <div class="home">
 
-  <div class="swiper-container" [swiper]="config" [(index)]="index">
+  <div class="swiper-container" [swiper]="config" [(index)]="index" (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
     <div class="title">Announcements</div>
     <div class="swiper-wrapper">
       <div *ngFor="let a of announcements$ | async" class="swiper-slide">

@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 import { FirebaseService } from './core/services/firebase.service';
 import { reducers, appEffects } from './store/index';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationService } from './core/services/notification.service';
+import { AppCoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -21,12 +23,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppCoreModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(appEffects),
-    // SwiperModule,
   ],
   providers: [
     FirebaseService,

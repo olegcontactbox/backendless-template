@@ -34,9 +34,9 @@ export class NewsEffects {
             console.log(`res raw`, res);
             this.store.dispatch(new SetCurrentNewsAmountAction(res.length));
 
-            if (!res.length) {
-                return of(new SetIsAllNewsLoadedAction());
-            }
+            // if (!res.length) {
+            //     return of(new SetIsAllNewsLoadedAction());
+            // }
 
             if (res.length < newsGetAmount) {
                 this.store.dispatch(new SetIsAllNewsLoadedAction());
@@ -64,7 +64,7 @@ export class NewsEffects {
             (NewsTypes.LoadNewsError),
         map(action => action.payload),
         tap(e => {
-            console.log(e);
+            console.log(`efx error`, e);
         }),
     );
 

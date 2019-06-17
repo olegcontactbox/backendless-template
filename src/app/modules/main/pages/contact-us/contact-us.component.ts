@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseService } from 'src/app/core/services/firebase.service';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -11,7 +12,7 @@ export class ContactUsComponent implements OnInit {
   form: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private firebaseService: FirebaseService ) { }
+  constructor(private fb: FormBuilder, private firebaseService: FirebaseService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -24,7 +25,9 @@ export class ContactUsComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
-    this.firebaseService.sendMessage(this.form.value);
+    this.firebaseService.sendMessage(this.form.value)
+      .then(res => this.notificationService.snackbar('Thanks! Your message successfully sent'))
+      .catch(e => this.notificationService.snackbar('Error!'));
   }
 
 }

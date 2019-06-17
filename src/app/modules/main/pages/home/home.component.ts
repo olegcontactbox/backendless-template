@@ -13,6 +13,7 @@ import { switchMap, map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   index = 0;
+
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
     pagination: false,
     observer: true,
     spaceBetween: 20,
+    loop: true,
 
     // autoplay: {
     //   delay: 8000,
@@ -58,9 +60,14 @@ export class HomeComponent implements OnInit {
     );
 
     // this.store.select(store => store.announcementsState.announcements).subscribe(a => this.announcements = a);
+  }
 
+  public onSwiperEvent(event: string): void {
+    console.log('Swiper event: ', event);
+  }
 
-
+  public onIndexChange(index: number): void {
+    console.log('Swiper index: ', index);
   }
 
 }
