@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to bel-temp!');
+    expect(page.getTitleText()).toEqual('My Backendless Template Header');
   });
 
   afterEach(async () => {
