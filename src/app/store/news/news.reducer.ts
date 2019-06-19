@@ -1,11 +1,12 @@
 import { NewsTypes, NewsActions } from './news.actions';
+import { QueryDocumentSnapshot } from '@angular/fire/firestore';
 
 export class NewsState {
     news: any[] = [];
     currentNewsAmount = 0;
     newsGetAmount = 5;
-    lastLoaded: any;
-    isAllNewsLoaded: any = false;
+    lastLoaded: QueryDocumentSnapshot<any>;
+    isAllNewsLoaded = false;
     allNewsAmount: number;
 }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFirestore, DocumentChangeAction, DocumentSnapshot, Action } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentSnapshot, Action, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 
 @Injectable()
@@ -11,7 +11,12 @@ export class FirebaseService {
     ) {
     }
 
-    getNews(currentNewsAmount: number, lastLoaded: any, newsGetAmount: number): Observable<DocumentChangeAction<{}>[]> {
+    getNews(
+        currentNewsAmount: number,
+        lastLoaded: QueryDocumentSnapshot<any>,
+        newsGetAmount: number,
+    ): Observable<DocumentChangeAction<{}>[]> {
+
         console.log(`get news : `, currentNewsAmount, lastLoaded);
 
         if (!currentNewsAmount) {
@@ -25,7 +30,7 @@ export class FirebaseService {
             .where('_fl_meta_.schema', '==', 'news')
             .orderBy('date', 'desc')
             .startAfter(lastLoaded)
-            .limit(newsGetAmount)).snapshotChanges() ;
+            .limit(newsGetAmount)).snapshotChanges();
     }
 
     getNewsCounter(): Observable<firestore.DocumentSnapshot> {

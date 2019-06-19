@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { INews } from '../../core/models/interfaces/news';
+import { QueryDocumentSnapshot } from '@angular/fire/firestore';
 
 export enum NewsTypes {
     LoadNews = '[NEWS] Load news',
@@ -54,7 +55,7 @@ export class SetCurrentNewsAmountAction implements Action {
 
 export class SetLastLoadedAction implements Action {
     readonly type = NewsTypes.SetLastLoaded;
-    constructor(public payload: any) { }
+    constructor(public payload: QueryDocumentSnapshot<any>) { }
 }
 
 export class SetIsAllNewsLoadedAction implements Action {
